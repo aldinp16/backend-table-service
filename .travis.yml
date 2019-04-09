@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 10.15.3
+
+sudo: false
+services:
+  - mysql
+cache:
+  directories:
+    - node_modules
+before_install:
+  - mysql -e 'CREATE DATABASE adonis'
+  - mv .env.example .env
+install:
+  - npm install
+script:
+  - npm run test
