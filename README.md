@@ -2,6 +2,7 @@
 
 [![HitCount](http://hits.dwyl.io/aldinp16/backend-table-service.svg)](http://hits.dwyl.io/aldinp16/backend-table-service)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/aldinp16/table-service/issues)
+[![Build Status](https://travis-ci.org/aldinp16/backend-table-service.svg?branch=master)](https://travis-ci.org/aldinp16/backend-table-service)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
