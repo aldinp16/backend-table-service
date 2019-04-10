@@ -50,7 +50,7 @@ class MenuController {
     const menu = await Menu.findOrFail(id)
 
     const menuData = request.only(['name', 'price', 'description', 'status'])
-    if (request.input('menu_pic')) {
+    if (request.file('menu_pic')) {
       menuData.image = await this.$storeImage(request)
     }
 
