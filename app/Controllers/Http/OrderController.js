@@ -29,7 +29,8 @@ class OrderController {
     const user = auth.current.user
     const orderData = request.only(['order_description', 'no_table'])
 
-    const trx = await Database.beginTransaction()
+    const globalTrx = Database.connection('mysql')._globalTrx
+    const trx = globalTrx || await Database.beginTransaction()
     const order = await user
       .order()
       .create({
@@ -39,7 +40,9 @@ class OrderController {
     await order
       .orderDetail()
       .createMany(request.input(['items']), trx)
-    await trx.commit()
+    if (!globalTrx) {
+      await trx.commit()
+    }
 
     return response.ok({
       status: 200,
@@ -74,7 +77,8 @@ class OrderController {
   }
 
   async destroy ({ request, response, auth, params: { id } }) {
-    const trx = await Database.beginTransaction()
+    const globalTrx = Database.connection('mysql')._globalTrx
+    const trx = globalTrx || await Database.beginTransaction()
     const deleteOrder = trx
       .table('orders')
       .where('id', id)
@@ -88,7 +92,10 @@ class OrderController {
       .where('order_id', id)
       .delete()
     await Promise.all([ deleteOrder, deleteOrderDetail, deleteTransaction ])
-    await trx.commit()
+
+    if (!globalTrx) {
+      await trx.commit()
+    }
 
     return response.ok({
       status: 200,

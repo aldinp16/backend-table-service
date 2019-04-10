@@ -12,7 +12,8 @@ class TransactionController {
     await order.load('orderDetail.menu')
     const orderJSON = order.toJSON()
 
-    const trx = await Database.beginTransaction()
+    const globalTrx = Database.connection('mysql')._globalTrx
+    const trx = globalTrx || await Database.beginTransaction()
     order.status = 1
     const transaction = new Transaction()
     transaction.total_price = orderJSON.orderDetail
@@ -23,7 +24,9 @@ class TransactionController {
     await transaction.save()
     await transaction.user().associate(user)
     await transaction.order().associate(order)
-    await trx.commit()
+    if (!globalTrx) {
+      await trx.commit()
+    }
 
     return response.ok({
       status: 200,
