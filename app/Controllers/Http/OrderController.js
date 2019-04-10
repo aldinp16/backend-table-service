@@ -74,8 +74,21 @@ class OrderController {
   }
 
   async destroy ({ request, response, auth, params: { id } }) {
-    const order = await Order.findOrFail(id)
-    await order.delete()
+    const trx = await Database.beginTransaction()
+    const deleteOrder = trx
+      .table('orders')
+      .where('id', id)
+      .delete()
+    const deleteOrderDetail = trx
+      .table('order_details')
+      .where('order_id', id)
+      .delete()
+    const deleteTransaction = trx
+      .table('transactions')
+      .where('order_id', id)
+      .delete()
+    await Promise.all([ deleteOrder, deleteOrderDetail, deleteTransaction ])
+    await trx.commit()
 
     return response.ok({
       status: 200,
