@@ -70,4 +70,10 @@ Route.group(() => {
     .validator('OrderDetail/Store')
 }).prefix('orders/:id')
 
+Route.group(() => {
+  Route.get('/main', 'DashboardController.index')
+  Route.get('/transcationCountHistory', 'DashboardController.transcationCountHistory')
+  Route.get('/menuTopOrder', 'DashboardController.menuTopOrder')
+}).prefix('/metric').middleware(['auth', 'role:administrator,owner'])
+
 Route.get('image/:filename', 'ImageController.index')
