@@ -34,7 +34,7 @@ test('User can create menu because level is administrator', async ({ client }) =
     data: { name: menu.name },
     message: 'Menu added'
   })
-})
+}).timeout(0)
 
 test('User can\'t create menu because level is no administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -60,7 +60,7 @@ test('User can\'t create menu because level is no administrator', async ({ clien
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can delete menu because level is administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'administrator' })
@@ -81,7 +81,7 @@ test('User can delete menu because level is administrator', async ({ client }) =
     data: null,
     message: 'Menu deleted'
   })
-})
+}).timeout(0)
 
 test('User can\'t delete menu because level is not administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -102,7 +102,7 @@ test('User can\'t delete menu because level is not administrator', async ({ clie
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can update menu because level is administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'administrator' })
@@ -123,7 +123,7 @@ test('User can update menu because level is administrator', async ({ client }) =
     error: false,
     data: { name: 'menunamechanged' }
   })
-})
+}).timeout(0)
 
 test('User can\'t update menu because level is not administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -145,7 +145,7 @@ test('User can\'t update menu because level is not administrator', async ({ clie
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can view menu list', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -166,7 +166,7 @@ test('User can view menu list', async ({ client }) => {
     data: [],
     message: null
   })
-})
+}).timeout(0)
 
 test('User can view menu detail', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -187,4 +187,4 @@ test('User can view menu detail', async ({ client }) => {
     data: { id: menu.id, name: menu.name },
     message: null
   })
-})
+}).timeout(0)

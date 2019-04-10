@@ -33,7 +33,7 @@ test('User can create order because level is in role list', async ({ client }) =
     data: null,
     message: 'Order created'
   })
-})
+}).timeout(0)
 
 test('User can\'t create order because level is not in role list', async ({ client }) => {
   const levelPromise = Level.create({ name: 'kasir' })
@@ -59,7 +59,7 @@ test('User can\'t create order because level is not in role list', async ({ clie
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can delete order because level is administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'administrator' })
@@ -88,7 +88,7 @@ test('User can delete order because level is administrator', async ({ client }) 
     data: null,
     message: 'Order destroyed'
   })
-})
+}).timeout(0)
 
 test('User can\'t delete order because level is not administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'pelanggan' })
@@ -117,7 +117,7 @@ test('User can\'t delete order because level is not administrator', async ({ cli
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can view all order list because level is not pelanggan', async ({ client }) => {
   const levelPromise = Level.create({ name: 'administrator' })
@@ -145,7 +145,7 @@ test('User can view all order list because level is not pelanggan', async ({ cli
     error: false,
     data: []
   })
-})
+}).timeout(0)
 
 test('User can view only own history order list because level is pelanggan', async ({ client }) => {
   const levelPromise = Level.create({ name: 'pelanggan' })
@@ -174,7 +174,7 @@ test('User can view only own history order list because level is pelanggan', asy
     error: false,
     data: [{ user_id: user.id }]
   })
-})
+}).timeout(0)
 
 test('User can process detail order because is waiter', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -204,7 +204,7 @@ test('User can process detail order because is waiter', async ({ client }) => {
     data: null,
     message: 'Order detail status updated'
   })
-})
+}).timeout(0)
 
 test('User can\'t process detail order because is not waiter', async ({ client }) => {
   const levelPromise = Level.create({ name: 'pelanggan' })
@@ -234,7 +234,7 @@ test('User can\'t process detail order because is not waiter', async ({ client }
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can process detail order because is kasir', async ({ client }) => {
   const levelPromise = Level.create({ name: 'kasir' })
@@ -266,7 +266,7 @@ test('User can process detail order because is kasir', async ({ client }) => {
     data: { total_paid: 500000 },
     message: 'Transaction success'
   })
-})
+}).timeout(0)
 
 test('User can\'t process detail order because is not kasir', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -296,7 +296,7 @@ test('User can\'t process detail order because is not kasir', async ({ client })
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can\'t view detail order from another user because level is pelanggan', async ({ client }) => {
   const levelPromise = Level.create({ name: 'pelanggan' })
@@ -325,7 +325,7 @@ test('User can\'t view detail order from another user because level is pelanggan
     data: null,
     message: 'Order Not Found'
   })
-})
+}).timeout(0)
 
 test('User can only view own detail order because level is pelanggan', async ({ client }) => {
   const levelPromise = Level.create({ name: 'pelanggan' })
@@ -355,4 +355,4 @@ test('User can only view own detail order because level is pelanggan', async ({ 
     data: { user_id: user.id },
     message: null
   })
-})
+}).timeout(0)

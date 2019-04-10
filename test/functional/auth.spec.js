@@ -26,7 +26,7 @@ test('User can auth with email and password', async ({ client }) => {
     error: false,
     message: 'Login successfully'
   })
-})
+}).timeout(0)
 
 test('User can\'t auth because incorect email or password', async ({ client }) => {
   const response = await client
@@ -41,7 +41,7 @@ test('User can\'t auth because incorect email or password', async ({ client }) =
     data: null,
     message: 'Invalid email or password'
   })
-})
+}).timeout(0)
 
 test('User can\'t auth because validation error', async ({ client }) => {
   const response = await client
@@ -60,4 +60,4 @@ test('User can\'t auth because validation error', async ({ client }) => {
     }],
     message: 'Validaton error'
   })
-})
+}).timeout(0)

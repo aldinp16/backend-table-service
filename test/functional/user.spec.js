@@ -31,7 +31,7 @@ test('User can create another user because level is in role list', async ({ clie
     data: { fullname: userModel.fullname },
     message: 'User created'
   })
-})
+}).timeout(0)
 
 test('User can\'t create another user because level is not in role list', async ({ client }) => {
   const levelPromise = Level.create({ name: 'owner' })
@@ -55,7 +55,7 @@ test('User can\'t create another user because level is not in role list', async 
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can update another user data because level is administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'administrator' })
@@ -78,7 +78,7 @@ test('User can update another user data because level is administrator', async (
     data: { fullname: 'fullnameChanged' },
     message: 'User updated'
   })
-})
+}).timeout(0)
 
 test('User can\'t update another user data because level is not administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -101,7 +101,7 @@ test('User can\'t update another user data because level is not administrator', 
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can delete another user because level is administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'administrator' })
@@ -123,7 +123,7 @@ test('User can delete another user because level is administrator', async ({ cli
     data: null,
     message: 'User deleted'
   })
-})
+}).timeout(0)
 
 test('User can\'t delete another user because level is not administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'waiter' })
@@ -145,7 +145,7 @@ test('User can\'t delete another user because level is not administrator', async
     data: null,
     message: 'Unauthorize Access'
   })
-})
+}).timeout(0)
 
 test('User can view another user profile because level is administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'administrator' })
@@ -167,7 +167,7 @@ test('User can view another user profile because level is administrator', async 
     data: { id: anotherUser.id },
     message: null
   })
-})
+}).timeout(0)
 
 test('User can\'t view another user profile because level is not administrator', async ({ client }) => {
   const levelPromise = Level.create({ name: 'pelanggan' })
@@ -189,4 +189,4 @@ test('User can\'t view another user profile because level is not administrator',
     data: null,
     message: 'User Not Found'
   })
-})
+}).timeout(0)
