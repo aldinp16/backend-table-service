@@ -244,8 +244,10 @@ test('User can process detail order because is kasir', async ({ client }) => {
 
   const order = await Factory.model('App/Models/Order').create()
   const orderDetail = await Factory.model('App/Models/OrderDetail').create()
+  const anotherUser = await Factory.model('App/Models/User').create()
 
   await Promise.all([
+    order.user().associate(anotherUser),
     user.level().associate(level),
     orderDetail.menu().associate(menu),
     orderDetail.order().associate(order)
