@@ -64,7 +64,7 @@ class UserController {
 
     if (request.input('level')) {
       const level = await Level.findByOrFail('name', request.input('level'))
-      user.level().associate(level)
+      await user.level().associate(level)
     }
 
     user.merge(request.only(['fullname', 'email', 'password']))
