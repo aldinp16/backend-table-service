@@ -17,9 +17,7 @@ class AuthController {
     }
 
     await user.load('level')
-    const userJSON = user.toJSON()
-    delete userJSON.password
-    const token = await auth.attempt(email, password, userJSON)
+    const token = await auth.attempt(email, password, user.toJSON())
     return response.ok({
       status: 200,
       error: false,
